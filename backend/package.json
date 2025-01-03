@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for socialmedia analyzer with langflow and DataStax Astra",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./build/server.js",
+    "dev": "tsc-watch --onSuccess \"npm run start\"",
+    "build": "tsc -p ."
+  },
+  "keywords": [
+    "backend",
+    "RAG",
+    "openAi",
+    "Datastax_Astra",
+    "express"
+  ],
+  "author": "Engage-lens",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "cassandra-driver": "^4.7.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
