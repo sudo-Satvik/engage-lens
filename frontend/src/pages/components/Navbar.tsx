@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-dark.svg";
 
@@ -7,6 +6,14 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleScrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false); // Closes the mobile menu
+  };
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -35,14 +42,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-xl font-bold flex items-center">
+            <a href="/" className="text-xl font-bold flex items-center">
               <img
                 src={logo}
                 alt="EngageLens Logo"
                 className="h-8 w-auto mr-2"
               />
               EngageLens
-            </Link>
+            </a>
           </div>
 
           {/* Hamburger Menu */}
@@ -80,24 +87,24 @@ const Navbar = () => {
           {/* Desktop Links */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                to="/features"
+              <button
+                onClick={() => handleScrollToSection("features")}
                 className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
               >
                 Features
-              </Link>
-              <Link
-                to="/services"
+              </button>
+              <button
+                onClick={() => handleScrollToSection("work")}
                 className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
               >
                 How it works?
-              </Link>
-              <Link
-                to="/contact"
+              </button>
+              <button
+                onClick={() => handleScrollToSection("about")}
                 className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
               >
-                About us  
-              </Link>
+                About us
+              </button>
             </div>
           </div>
 
@@ -124,27 +131,24 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-gray-800">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              to="/features"
+            <button
+              onClick={() => handleScrollToSection("features")}
               className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
-              onClick={() => setIsMenuOpen(false)}
             >
               Features
-            </Link>
-            <Link
-              to="/services"
+            </button>
+            <button
+              onClick={() => handleScrollToSection("work")}
               className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
-              onClick={() => setIsMenuOpen(false)}
             >
               How it works?
-            </Link>
-            <Link
-              to="/about"
+            </button>
+            <button
+              onClick={() => handleScrollToSection("about")}
               className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
-              onClick={() => setIsMenuOpen(false)}
             >
               About us
-            </Link>
+            </button>
             <div className="flex flex-col px-3 space-y-2">
               <Button size="sm" onClick={() => setIsMenuOpen(false)}>
                 Login
