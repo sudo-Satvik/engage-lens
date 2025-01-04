@@ -1,4 +1,7 @@
-# EngageLens by Team ANiMAXiO 🔍  
+<img src="./frontend/src/assets/logo-light.png" alt="EngageLens Logo" width="100px">
+
+
+# EngageLens by Team ANiMAXiO 
 
 A powerful social media analytics platform that provides deep insights into your social media engagement through an AI-powered lens. Built for the **Level Supermind Hackathon**, EngageLens leverages **DataStax Astra DB** and **Langflow** to analyze engagement data and deliver actionable insights.  
 
