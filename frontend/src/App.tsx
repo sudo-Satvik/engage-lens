@@ -3,8 +3,6 @@ import Register from "./pages/components/auth/Register"
 import Signup from "./pages/components/auth/Signup"
 
 function App() {
-
-
   return (
     <>
       <main>
