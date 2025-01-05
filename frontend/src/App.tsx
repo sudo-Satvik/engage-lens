@@ -1,6 +1,9 @@
 import Login from "./pages/components/auth/Login";
 import Register from "@/pages/components/auth/Register";
 import Dashboard from "@/pages/components/Dashboard";
+import PostInsights from '@/pages/components/dashboard/PostInsighnts';
+import EngagementTrends from '@/pages/components/dashboard/EngagementTrends';
+import  Chat from '@/pages/components/dashboard/Chat';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/pages/components/Layout";
 import LandingPage from "@/pages/components/LandingPage";
@@ -14,7 +17,11 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="dashboard/" element={<Dashboard />} >
+              <Route path="post-insights" element={<PostInsights />}/>
+              <Route path="engagement-trend" element={<EngagementTrends />}/>
+              <Route path="chat" element={<Chat />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
