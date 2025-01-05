@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-dark.svg";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -42,14 +43,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-xl font-bold flex items-center">
+            <Link to={"/"} className="flex items-center">
               <img
-                src={logo}
-                alt="EngageLens Logo"
-                className="h-8 w-auto mr-2"
-              />
-              EngageLens
-            </a>
+                  src={logo}
+                  alt="EngageLens Logo"
+                  className="h-8 w-auto mr-2"
+                />
+                EngageLens
+            </Link>  
           </div>
 
           {/* Hamburger Menu */}

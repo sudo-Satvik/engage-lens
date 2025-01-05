@@ -11,6 +11,9 @@ import {
 } from "react-feather";
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { Link } from "react-router";
+
+
 
 const LandingPage: React.FC = () => {
   const fadeIn = {
@@ -89,7 +92,10 @@ const LandingPage: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="space-x-4"
         >
-          <Button size="lg" variant="outline" className='text-black hover:bg-black hover:text-white  transition-all duration-300'>Get Started</Button>
+          <Link to={"/dashboard"}>
+            <Button size="lg" variant="outline" className='text-black hover:bg-black hover:text-white  transition-all duration-300'
+            >Get Started</Button>
+          </Link>
           <Button
               variant="outline"
               className="relative group overflow-hidden px-4 py-2 border-2 border-white bg-black text-white transition-all duration-300"
