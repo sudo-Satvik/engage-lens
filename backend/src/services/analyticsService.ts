@@ -5,7 +5,7 @@ import {EngagementData, EngagementMetrics} from '../types/index';
 export const generateMockData = async(count: number = 50): Promise<EngagementData[]> => {
     const postTypes = ['static', 'reel', 'carousel'];
     const mockData: EngagementData[] = [];
-
+    
     for(let i = 0; i < count; i++) {
         mockData.push({
             id: uuidv4(),
@@ -16,10 +16,8 @@ export const generateMockData = async(count: number = 50): Promise<EngagementDat
             timestamp: Date.now(),
         });
     }
-
     const result = await EngagementModel.insertMany(mockData);
     console.log("result", result);
-    console.log("mock data", mockData);
     return mockData;
 }
 
