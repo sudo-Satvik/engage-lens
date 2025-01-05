@@ -4,7 +4,6 @@ import Dashboard from "@/pages/components/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/pages/components/Layout";
 import LandingPage from "@/pages/components/LandingPage";
-
 function App() {
   return (
     <>
