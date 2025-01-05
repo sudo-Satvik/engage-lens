@@ -10,7 +10,7 @@ export const analyticsController = {
             console.log("count 1", count);
             const mockData = await generateMockData(count);
             console.log("mock data", mockData);
-            res.json({message: `Mock data generated ${mockData.length} entries`, sample: mockData.slice(0, 5)});
+            res.json({message: `Mock data generated ${mockData.length} entries`, sample: mockData});
         } catch (error) {
             res.status(500).json({error: "Error generating mock data"});
         }

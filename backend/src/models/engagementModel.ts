@@ -1,42 +1,55 @@
 import { db } from "../config/database";
-import {EngagementData, EngagementMetrics} from '../types/index';
+import { EngagementData, EngagementMetrics } from '../types/index';
 
+const COLLECTION_NAME = 'engagement_metrics';
 
-const collection = db.collection("social_media_engagement");
+// Define an interface for the accumulator object
+interface AccumulatorType {
+    [key: string]: {
+        _id: string;
+        avgLikes: number;
+        avgShares: number;
+        avgComments: number;
+        count: number;
+    }
+}
 
 export const EngagementModel = {
-    insertMany: async (data: EngagementData[]) => {
-        return await collection.insertMany(data);
+    insertMany: async (documents: EngagementData[]) => {
+        const collection = db.collection(COLLECTION_NAME);
+        const insertPromises = documents.map(doc => collection.insertOne(doc));
+        return Promise.all(insertPromises);
     },
-    find: async (query: object = {}) => {
-        return await collection.find(query).toArray();
-    },
-    aggregate: async (pipeline: object[]): Promise<EngagementMetrics[]> => {
-        const result = await collection.find({}).toArray();
-        // Perform aggregation in memory
-        const grouped = result.reduce((acc, item) => {
-            if (!acc[item.postType]) {
-                acc[item.postType] = {
-                    _id: item.postType,
-                    totalLikes: 0,
-                    totalShares: 0,
-                    totalComments: 0,
-                    count: 0
-                };
-            }
-            acc[item.postType].totalLikes += item.likes;
-            acc[item.postType].totalShares += item.shares;
-            acc[item.postType].totalComments += item.comments;
-            acc[item.postType].count++;
-            return acc;
-        }, {} as Record<string, any>);
 
-        return Object.values(grouped).map(group => ({
-            _id: group._id,
-            avgLikes: group.totalLikes / group.count,
-            avgShares: group.totalShares / group.count,
-            avgComments: group.totalComments / group.count,
-            count: group.count
-        }));
+    aggregate: async (pipeline: object[]): Promise<EngagementMetrics[]> => {
+        const collection = db.collection(COLLECTION_NAME);
+        
+        return collection.find({}).toArray().then(documents => {
+            // Specify the accumulator type
+            return documents.reduce<AccumulatorType>((acc, doc) => {
+                const postType = doc.postType as string;
+                if (!acc[postType]) {
+                    acc[postType] = {
+                        _id: postType,
+                        avgLikes: 0,
+                        avgShares: 0,
+                        avgComments: 0,
+                        count: 0
+                    };
+                }
+                acc[postType].avgLikes += doc.likes;
+                acc[postType].avgShares += doc.shares;
+                acc[postType].avgComments += doc.comments;
+                acc[postType].count++;
+                return acc;
+            }, {});
+        }).then(grouped => {
+            return Object.values(grouped).map(group => ({
+                ...group,
+                avgLikes: group.avgLikes / group.count,
+                avgShares: group.avgShares / group.count,
+                avgComments: group.avgComments / group.count
+            }));
+        });
     }
 };

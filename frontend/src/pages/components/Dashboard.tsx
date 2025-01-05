@@ -8,28 +8,41 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [metrics, setMetrics] = useState<EngagementMetrics[]>([]);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.post("http://localhost:8000/api/analytics/generate-mock-data", {count: 50});
-
-        const metricResponse = await axios.get("http://localhost:8000/api/analytics/engagement-metrics");
-        
-        if(!response.data || !metricResponse.data){
-          throw new Error("Error generating mock data");
-        }
-        console.log("generated data", response.data);
-        console.log("engagement metrics", metricResponse.data);
-        setAllPosts(response.data);
-        setMetrics(metricResponse.data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      } finally {
-        setLoading(false);
+  const fetchMockData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("http://localhost:8000/api/analytics/generate-mock-data", {count: 50});
+      if(!response.data){
+        throw new Error("Error generating mock data");
       }
+      console.log("generated data", response.data.sample);
+      setAllPosts(response.data.sample);
+    } catch (error) {
+      console.error("Error fetching mock data:", error);
+    } finally {
+      setLoading(false);
     }
-    fetchPosts();
+  }
+
+  const fetchEngagementMetrics = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:8000/api/analytics/engagement-metrics");
+      if(!response.data){
+        throw new Error("Error fetching engagement metrics");
+      }
+      console.log("engagement metrics", response.data);
+      setMetrics(response.data);
+    } catch (error) {
+      console.error("Error fetching engagement metrics:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchMockData();
+    fetchEngagementMetrics();
   }, []);
 
 
