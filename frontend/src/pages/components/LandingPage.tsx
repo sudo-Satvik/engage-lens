@@ -92,10 +92,11 @@ const LandingPage: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="space-x-4"
         >
-          <Link to={"/dashboard"}>
+          <Link to={"/register"}>
             <Button size="lg" variant="outline" className='text-black hover:bg-black hover:text-white  transition-all duration-300'
             >Get Started</Button>
           </Link>
+          <Link to={"/login"}>
           <Button
               variant="outline"
               className="relative group overflow-hidden px-4 py-2 border-2 border-white bg-black text-white transition-all duration-300"
@@ -103,6 +104,7 @@ const LandingPage: React.FC = () => {
             >
               <span className="relative z-10">Login</span>
             </Button>
+          </Link>
         </motion.div>
       </HeroHighlight>
       </section>
@@ -276,9 +278,11 @@ const LandingPage: React.FC = () => {
           Join thousands of businesses already leveraging our AI-powered
           analytics platform.
         </p>
-        <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-200">
-          Get Started Now
-        </Button>
+        <Link to={"/register"}>
+          <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-200">
+            Get Started Now
+          </Button>
+        </Link>
       </section>
     </div>
   );
