@@ -2,7 +2,7 @@ import axios from "axios";
 import {EngagementMetrics} from '../types/index';
 
 
-const LANGFLOW_API_URL = process.env.LANGFLOW_API_URL || "http://localhost:7860/api/v1/predict";
+const LANGFLOW_API_URL = process.env.LANGFLOW_API_URL || "http://localhost:7860/api/v1/predict/c9428853-eb0b-4040-989d-7832f8ef4bd1";
 
 export const generateInsights = async (metrics: EngagementMetrics[]): Promise<string> => {
     try {
