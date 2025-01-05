@@ -2,7 +2,7 @@ import {v4 as uuidv4} from 'uuid'
 import { EngagementModel } from '../models/engagementModel'
 import {EngagementData, EngagementMetrics} from '../types/index';
 
-export const generateMockData = async(count: number = 100): Promise<EngagementData[]> => {
+export const generateMockData = async(count: number = 50): Promise<EngagementData[]> => {
     const postTypes = ['static', 'reel', 'carousel'];
     const mockData: EngagementData[] = [];
 
@@ -17,7 +17,9 @@ export const generateMockData = async(count: number = 100): Promise<EngagementDa
         });
     }
 
-    await EngagementModel.insertMany(mockData);
+    const result = await EngagementModel.insertMany(mockData);
+    console.log("result", result);
+    console.log("mock data", mockData);
     return mockData;
 }
 

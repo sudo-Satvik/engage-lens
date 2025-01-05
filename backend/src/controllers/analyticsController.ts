@@ -7,10 +7,12 @@ export const analyticsController = {
     generateMockData: async (req: Request, res: Response) => {
         try {
             const count = req.body.count || 100;
+            console.log("count 1", count);
             const mockData = await generateMockData(count);
+            console.log("mock data", mockData);
             res.json({message: `Mock data generated ${mockData.length} entries`, sample: mockData.slice(0, 5)});
         } catch (error) {
-            res.send(500).json({error: "Error generating mock data"});
+            res.status(500).json({error: "Error generating mock data"});
         }
     },
 
@@ -19,7 +21,7 @@ export const analyticsController = {
             const metrics = await getEngagementMetrics();
             res.json(metrics);
         } catch (error) {
-            res.send(500).json({error: "Error getting engagement metrics"});
+            res.status(500).json({error: "Error getting engagement metrics"});
         }
     },
 
@@ -29,7 +31,7 @@ export const analyticsController = {
             const insights = await generateInsights(metrics);
             res.json(insights);
         } catch (error) {
-            res.send(500).json({error: "Error getting insights"});
+            res.status(500).json({error: "Error getting insights"});
         }
     }
 }
