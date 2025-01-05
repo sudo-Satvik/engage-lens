@@ -112,21 +112,22 @@ const Navbar = () => {
           {/* Right Buttons */}
           <div className="hidden md:flex items-center space-x-2">
             <Link to={"/login"}>
-            <Button
-              size="sm"
-              className="relative group overflow-hidden px-4 py-2 hover:bg-gray-700"
-            >
-              <span className="relative z-10">Login</span>
-            </Button>
+              <Button
+                size="sm"
+                className="relative group overflow-hidden px-4 py-2 hover:bg-gray-700"
+              >
+                <span className="relative z-10">Login</span>
+              </Button>
             </Link>
-
-            <Button
-              variant="outline"
-              className="relative group overflow-hidden px-4 py-2 border-2 border-white bg-white text-black hover:bg-transparent hover:text-white transition-all duration-300"
-              size="sm"
-            >
-              <span className="relative z-10">Get Started</span>
-            </Button>
+            <Link to={"/register"}>
+              <Button
+                variant="outline"
+                className="relative group overflow-hidden px-4 py-2 border-2 border-white bg-white text-black hover:bg-transparent hover:text-white transition-all duration-300"
+                size="sm"
+              >
+                <span className="relative z-10">Get Started</span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -159,9 +160,11 @@ const Navbar = () => {
                   Login
                 </Button>
               </Link>
-              <Button variant="outline" size="sm" className="text-black">
-                Get Started
-              </Button>
+              <Link to={"/register"}>
+                <Button variant="outline" size="sm" className="text-black">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
