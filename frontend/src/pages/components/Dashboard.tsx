@@ -1,111 +1,49 @@
-import { useEffect, useState } from 'react'
-import {EngagementData, EngagementMetrics} from '../../types/engagementType';
-import axios from 'axios';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+'use client'
 
-const Dashboard = () => {
-  const [allPosts, setAllPosts] = useState<EngagementData[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [metrics, setMetrics] = useState<EngagementMetrics[]>([]);
+import { useState, useEffect } from 'react'
+import { AiChat } from "@/components/dashboard/ai-chat"
+import { LineGraph } from "@/components/dashboard/line-graph"
+import { MetricCards } from "@/components/dashboard/metric-cards"
+import { Sidebar } from "@/pages/components/Sidebar"
+import { Button } from "@/components/ui/button"
+import { Menu } from 'lucide-react'
 
-  const fetchMockData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.post("http://localhost:8000/api/analytics/generate-mock-data", {count: 50});
-      if(!response.data){
-        throw new Error("Error generating mock data");
-      }
-      console.log("generated data", response.data.sample);
-      setAllPosts(response.data.sample);
-    } catch (error) {
-      console.error("Error fetching mock data:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  const fetchEngagementMetrics = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get("http://localhost:8000/api/analytics/engagement-metrics");
-      if(!response.data){
-        throw new Error("Error fetching engagement metrics");
-      }
-      console.log("engagement metrics", response.data);
-      setMetrics(response.data);
-    } catch (error) {
-      console.error("Error fetching engagement metrics:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
+export default function DashboardPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetchMockData();
-    fetchEngagementMetrics();
-  }, []);
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
 
-
-  if(loading){
-    return (
-      <>
-      <main>
-        <h2 className='text-3xl font-bold'>Loading...</h2>
-      </main>
-      </>
-    )
-  }
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
-    <>
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Social Media Dashboard</h1>
-      
-      {/* Engagement Metrics Chart */}
-      <div className="mb-8 bg-white shadow rounded-lg p-4">
-        <h2 className="text-xl font-semibold mb-4">Engagement Metrics</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={metrics}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="_id" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="avgLikes" stroke="#8884d8" name="Avg Likes" />
-            <Line type="monotone" dataKey="avgShares" stroke="#82ca9d" name="Avg Shares" />
-            <Line type="monotone" dataKey="avgComments" stroke="#ffc658" name="Avg Comments" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* Data Table */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
-        <table className="min-w-full">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post Type</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Likes</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shares</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comments</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {allPosts.map((post) => (
-              <tr key={post.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{post.postType}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{post.likes}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{post.shares}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{post.comments}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{new Date(post.timestamp).toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="flex h-screen overflow-hidden bg-background">
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="flex items-center justify-between p-4 lg:p-6 border-b border-border">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setIsSidebarOpen(true)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight">Hello UserName</h2>
+        </header>
+        <main className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
+          <MetricCards isLoading={isLoading } />
+          <div className="grid gap-4 grid-cols-1 lg:grid-cols-6">
+            <LineGraph isLoading={isLoading} />
+            <AiChat isLoading={isLoading} />
+          </div>
+        </main>
       </div>
     </div>
-    </>
   )
 }
-
-export default Dashboard
