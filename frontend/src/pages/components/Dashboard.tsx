@@ -11,7 +11,54 @@ import { Menu } from 'lucide-react'
 export default function DashboardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [allPosts, setAllPosts] = useState<EngagementData[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [metrics, setMetrics] = useState<EngagementMetrics[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
+      const metricsResponse = await axios.get(
+        "http://localhost:8000/api/analytics/engagement-metrics"
+      );
+      if (metricsResponse.data && metricsResponse.data.length > 0) {
+        setMetrics(metricsResponse.data);
+        const postResponse = await axios.get(
+          "http://localhost:8000/api/analytics/all-posts"
+        );
+        if (postResponse.data && postResponse.data.length > 0) {
+          setAllPosts(postResponse.data);
+        }
+      } else {
+        const mockResponse = await axios.post(
+          "http://localhost:8000/api/analytics/generate-mock-data",
+          { count: 50 }
+        );
+        if (!mockResponse.data) {
+          throw new Error("Error generating mock data");
+        }
+        setAllPosts(mockResponse.data);
+
+        const updateMetricsResponse = await axios.get(
+          "http://localhost:8000/api/analytics/engagement-metrics"
+        );
+        setMetrics(updateMetricsResponse.data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error instanceof Error ? error.message : "Failed to fetch data. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   useEffect(() => {
     // Simulate data loading
     const timer = setTimeout(() => {
