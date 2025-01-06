@@ -12,7 +12,8 @@ import {
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Link } from "react-router";
-
+import { Sidebar } from "lucide-react";
+import {MacbookScrollDemo} from "@/components/Showcase";
 
 
 const LandingPage: React.FC = () => {
@@ -55,7 +56,7 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}
       <section className=" text-center" id="home">
-      <HeroHighlight className="mt-[5rem]">
+      <HeroHighlight className="mt-[-3rem] sm:mt-[5rem]">
         <motion.h1
           initial={{
             opacity: 0,
@@ -93,20 +94,20 @@ const LandingPage: React.FC = () => {
           className="space-x-4"
         >
           <Link to={"/dashboard"}>
-            <Button size="lg" variant="outline" className='text-black hover:bg-black hover:text-white  transition-all duration-300'
-            >Get Started</Button>
-          </Link>
-          <Link to={"/login"}>
           <Button
               variant="outline"
               className="relative group overflow-hidden px-4 py-2 border-2 border-white bg-black text-white transition-all duration-300"
               size="lg"
             >
-              <span className="relative z-10">Login</span>
+              <span className="relative z-10 flex gap-2"><Sidebar />Dashboard</span>
             </Button>
           </Link>
         </motion.div>
       </HeroHighlight>
+          <MacbookScrollDemo />
+      </section>
+      
+      <section className="max-w-[1440px]">
       </section>
 
       {/* Features Section */}
@@ -225,47 +226,6 @@ const LandingPage: React.FC = () => {
       {/* About Us Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800" id="about">
         <h2 className="text-4xl font-bold text-center mb-16">Meet Our Team</h2>
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {[
-            {
-              name: "Dr. Jane Smith",
-              role: "AI Research Lead",
-              bio: "With over 15 years of experience in AI and machine learning, Dr. Smith leads our research initiatives in social media analytics.",
-            },
-            {
-              name: "Mike Johnson",
-              role: "Full Stack Developer",
-              bio: "Mike is a seasoned developer with expertise in building scalable data processing systems and intuitive user interfaces.",
-            },
-            {
-              name: "Sarah Lee",
-              role: "Data Scientist",
-              bio: "Sarah specializes in statistical analysis and predictive modeling, bringing deep insights to our social media performance metrics.",
-            },
-          ].map((member, index) => (
-            <motion.div
-              key={member.name}
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-700 p-8 rounded-lg shadow-lg"
-            >
-              <h3 className="text-2xl font-semibold mb-2">{member.name}</h3>
-              <p className="text-gray-400 mb-4">{member.role}</p>
-              <div className="w-40 h-40 rounded-full bg-gray-600 mx-auto mb-6"></div>
-              <p className="text-gray-300 text-center mb-6">{member.bio}</p>
-              <div className="text-center">
-                <Button
-                  variant="outline"
-                  className="text-blue-400 border-blue-400 hover:bg-blue-400 hover:text-gray-900"
-                >
-                  Learn More <ChevronRight className="ml-2 inline-block" />
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </div> */}
         <AnimatedTestimonials testimonials={testimonials} />
       </section>
 
@@ -278,9 +238,9 @@ const LandingPage: React.FC = () => {
           Join thousands of businesses already leveraging our AI-powered
           analytics platform.
         </p>
-        <Link to={"/register"}>
+        <Link to={"/dashboard"}>
           <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-200">
-            Get Started Now
+            Navigate to Dashboard
           </Button>
         </Link>
       </section>

@@ -1,5 +1,5 @@
 'use client'
-
+import axios from 'axios';
 import { useState, useEffect } from 'react'
 import { AiChat } from "@/components/dashboard/ai-chat"
 import { LineGraph } from "@/components/dashboard/line-graph"
@@ -7,8 +7,9 @@ import { MetricCards } from "@/components/dashboard/metric-cards"
 import { Sidebar } from "@/pages/components/Sidebar"
 import { Button } from "@/components/ui/button"
 import { Menu } from 'lucide-react'
-
-export default function DashboardPage() {
+import { EngagementData, EngagementMetrics } from '@/types/engagementType'
+// import { Outlet } from 'react-router-dom';
+export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [allPosts, setAllPosts] = useState<EngagementData[]>([]);
@@ -35,7 +36,7 @@ export default function DashboardPage() {
       } else {
         const mockResponse = await axios.post(
           "http://localhost:8000/api/analytics/generate-mock-data",
-          { count: 50 }
+          { count: 100 }
         );
         if (!mockResponse.data) {
           throw new Error("Error generating mock data");
@@ -54,7 +55,7 @@ export default function DashboardPage() {
       setLoading(false);
     }
   };
-
+  // console.log(metrics);
   useEffect(() => {
     fetchData();
   }, []);
@@ -81,14 +82,24 @@ export default function DashboardPage() {
           >
             <Menu className="h-6 w-6" />
           </Button>
-          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight">Hello UserName</h2>
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight ml-5">Social Media Analysis Dashboard</h2>
         </header>
         <main className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
-          <MetricCards isLoading={isLoading } />
+        <div>
+        <h2 className="text-xl lg:text-2xl font-bold tracking-tight ml-5">Engagement Overview</h2>
+        <h3 className="text-md text-gray-400 tracking-tight ml-5">Average Interaction Types</h3>
+        </div>
+          {/* <MetricCards isLoading={isLoading } /> */}
+          <MetricCards 
+            isLoading={isLoading} 
+            metrics={metrics} 
+            allPosts={allPosts} 
+          />
           <div className="grid gap-4 grid-cols-1 lg:grid-cols-6">
-            <LineGraph isLoading={isLoading} />
+            <LineGraph isLoading={isLoading} data={allPosts} />
             <AiChat isLoading={isLoading} />
           </div>
+        
         </main>
       </div>
     </div>
