@@ -92,7 +92,7 @@ const LandingPage: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="space-x-4"
         >
-          <Link to={"/register"}>
+          <Link to={"/dashboard"}>
             <Button size="lg" variant="outline" className='text-black hover:bg-black hover:text-white  transition-all duration-300'
             >Get Started</Button>
           </Link>

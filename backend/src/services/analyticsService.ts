@@ -1,6 +1,7 @@
 import {v4 as uuidv4} from 'uuid'
 import { EngagementModel } from '../models/engagementModel'
 import {EngagementData, EngagementMetrics} from '../types/index';
+import { getCollection } from '../config/database';
 
 export const generateMockData = async(count: number = 50): Promise<EngagementData[]> => {
     const postTypes = ['static', 'reel', 'carousel'];
@@ -16,8 +17,7 @@ export const generateMockData = async(count: number = 50): Promise<EngagementDat
             timestamp: Date.now(),
         });
     }
-    const result = await EngagementModel.insertMany(mockData);
-    console.log("result", result);
+    await EngagementModel.insertMany(mockData);
     return mockData;
 }
 
@@ -27,7 +27,7 @@ export const getEngagementMetrics = (): Promise<EngagementMetrics[]> => {
             $group: {
                 _id: "$postType",
                 avgLikes: {$avg: "$likes"},
-                avgShare: {$avg: "$shares"},
+                avgShares: {$avg: "$shares"},
                 avgComments: {$avg: "$comments"},
                 count: {$sum: 1}
             }
@@ -35,4 +35,9 @@ export const getEngagementMetrics = (): Promise<EngagementMetrics[]> => {
     ];
 
     return EngagementModel.aggregate(pipeline);
+}
+
+export const getAllPost = async() => {
+    const collection  = getCollection("engagement_metrics");
+    return collection.find({}).sort({timestamp: -1}).toArray();
 }
