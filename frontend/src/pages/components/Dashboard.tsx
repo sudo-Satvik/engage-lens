@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [allPosts, setAllPosts] = useState<EngagementData[]>([]);
   const [metrics, setMetrics] = useState<EngagementMetrics[]>([]);
   const [error, setError] = useState<string | null>(null);
-
+  
   const fetchData = async () => {
     try {
       setIsLoading(true);
@@ -32,7 +32,7 @@ export default function Dashboard() {
       } else {
         const mockResponse = await axios.post(
           "http://localhost:8000/api/analytics/generate-mock-data",
-          { count: 100 }
+          { count: 200 }
         );
         if (!mockResponse.data) {
           throw new Error("Error generating mock data");
