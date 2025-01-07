@@ -9,15 +9,44 @@ export const generateInsights = async (
   metrics: EngagementMetrics[]
 ): Promise<string> => {
   try {
+    console.log("Sending request to Langflow for insights:", { metrics });
     const response = await axios.post(LANGFLOW_API_URL, {
       input: {
         metrics: JSON.stringify(metrics),
       },
     });
-    console.log("insigts data", response.data);
-    return response.data.output || response.data.result || response.data;
+    console.log("Langflow insights response:", response.data);
+    const result = response.data.output || response.data.result || response.data;
+    if (typeof result !== 'string') {
+      throw new Error(`Unexpected response format: ${JSON.stringify(result)}`);
+    }
+    return result;
   } catch (error) {
     console.error("Error generating insights:", error);
-    throw error;
+    throw new Error(`Failed to generate insights: ${error}`);
+  }
+};
+
+export const generateChatResponse = async (
+  message: string,
+  history: { role: string; content: string }[]
+): Promise<string> => {
+  try {
+    console.log("Sending request to Langflow:", { message, history });
+    const response = await axios.post(LANGFLOW_API_URL, {
+      input: {
+        message,
+        history: JSON.stringify(history),
+      },
+    });
+    console.log("Langflow response:", response.data);
+    const result = response.data.output || response.data.result || response.data;
+    if (typeof result !== 'string') {
+      throw new Error(`Unexpected response format: ${JSON.stringify(result)}`);
+    }
+    return result;
+  } catch (error) {
+    console.error("Error generating chat response:", error);
+    throw new Error(`Failed to generate chat response: ${error}`);
   }
 };

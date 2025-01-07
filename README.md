@@ -36,7 +36,6 @@ EngageLens is your intelligent companion for social media analytics, helping you
   - Carousel posts.  
   - Reels.  
   - Static images.  
-  - Stories.  
 
 ---
 
@@ -44,24 +43,48 @@ EngageLens is your intelligent companion for social media analytics, helping you
 
 - **DataStax Astra DB**: For database management and operations.  
 - **Langflow**: For workflow creation and GPT integration.  
-- **OpenAI GPT**: To generate AI-driven insights.  
-- **React**: For building the user interface and analytics dashboard.
-- **Python**: Backend scripting for data management and analysis.  
+- **OpenAI API key**: To generate AI-driven insights.  
+- **Vite-React**: For building the user interface and analytics dashboard.
+- **NodeJS/Express**: Backend Server for API calls and data management.  
 
 ---
 
 ## 📂 Project Structure  
 
 ```plaintext
-├── data/
-│   └── mock_data.json            # Sample engagement data
-├── src/
-│   ├── db_setup.py               # Database schema creation script
-│   ├── data_insert.py            # Script to insert mock data
-│   ├── fetch_data.py             # Script to query Astra DB
-├── workflows/
-│   └── social_analytics.json     # Langflow workflow file
-├── README.md                     # Project documentation
+engage-lens/
+├── .vscode/              # Configuration files for Visual Studio Code
+├── backend/              # Backend server implementation
+│   ├── build/            # Compiled backend files (if applicable)
+│   ├── node_modules/     # Dependencies for the backend
+│   ├── src/              # Source code for backend
+│   │   ├── index.js      # Main entry point for the Express.js server
+│   │   └── other-files   # Additional backend modules
+│   ├── .env              # Environment variables for backend configuration
+│   ├── package.json      # Backend package dependencies
+│   ├── package-lock.json # Backend package lockfile
+│   ├── tsconfig.json     # TypeScript configuration for backend
+│   └── .gitignore        # Ignore list for backend files
+├── frontend/             # Frontend implementation
+│   ├── .vite/            # Vite cache files (generated)
+│   ├── node_modules/     # Dependencies for the frontend
+│   ├── public/           # Static assets like images and icons
+│   ├── src/              # Source code for frontend
+│   │   ├── components/   # Reusable UI components
+│   │   ├── App.jsx       # Main React app file (or equivalent)
+│   │   └── other-files   # Additional frontend modules
+│   ├── index.html        # Root HTML file for the frontend
+│   ├── package.json      # Frontend package dependencies
+│   ├── package-lock.json # Frontend package lockfile
+│   ├── tailwind.config.js # Tailwind CSS configuration
+│   ├── vite.config.ts    # Vite configuration file
+│   ├── eslint.config.js  # ESLint configuration
+│   ├── tsconfig.json     # TypeScript configuration
+│   ├── postcss.config.js # PostCSS configuration
+│   └── .gitignore        # Ignore list for frontend files
+├── README.md             # Documentation for the project
+├── LICENSE               # License file
+└── other-files           # Additional files or configuration
 ```
 
 
@@ -74,7 +97,7 @@ cd EngageLens
 
 2. Install Dependencies
 ```bash
-pip install cassandra-driver
+npm install
 ```
 Follow Langflow [documentation](https://docs.langflow.org/) to set up Langflow.
 
@@ -83,13 +106,22 @@ Sign up at DataStax Astra.
 Create a database and download the secure connect bundle.
 Place the secure connect bundle in the project directory.
 
-4. Configure the Database
-Run the **db_setup.py** script in the **src/** folder to set up the schema. Then insert mock data using **data_insert.py**.
+4. Set Up **OpenAI API key**
+Sign up at OpenAI.
+Generate an API key.
 
-5. Run Langflow Workflow
-Open Langflow.
-Load the workflow file from workflows/social_analytics.json.
-Test the workflow by entering different post types as input and observe the insights.
+5. Start the Backend Server
+```bash
+npm run dev
+```
+
+6. Start the Frontend Server
+```bash
+npm run dev
+```
+
+7. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
 
 
 ## 🎯 Vision

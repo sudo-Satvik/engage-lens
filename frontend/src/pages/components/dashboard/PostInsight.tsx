@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { MetricCards } from "@/components/dashboard/metric-cards";
 import { LineGraph } from "@/components/dashboard/line-graph";
 import { EngagementData, EngagementMetrics } from "@/types/engagementType";
+import InsightsDisplay from '../InsightsDisplay';
 
 interface DashboardContext {
   isLoading: boolean;
@@ -21,6 +22,7 @@ export default function PostInsight() {
       </div>
       <MetricCards isLoading={isLoading} metrics={metrics} allPosts={allPosts} />
       <LineGraph isLoading={isLoading} data={allPosts} />
+      <InsightsDisplay isLoading={isLoading} />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { EngagementData, EngagementMetrics } from "../types/index";
 import { getCollection } from "../config/database";
 
 export const generateMockData = async (
-  count: number = 50
+  count: number = 200
 ): Promise<EngagementData[]> => {
   const postTypes = ["static", "reel", "carousel"];
   const mockData: EngagementData[] = [];
