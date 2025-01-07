@@ -1,23 +1,15 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-  LayoutDashboard,
-  LineChart,
-  MessageSquare,
-  LogOut,
-  BarChart2,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-import {Link} from "react-router-dom";
+import { LayoutDashboard, LineChart, MessageSquare, LogOut, BarChart2, ChevronLeft, ChevronRight } from 'lucide-react';
 import logo from "@/assets/logo-dark.svg";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", active: true },
-  { icon: BarChart2, label: "Post Insights", href: "/post-insights" },
-  { icon: LineChart, label: "Engagement Trends", href: "/engagement-trend" },
-  { icon: MessageSquare, label: "Chat", href: "/chat" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+  { icon: BarChart2, label: "Post Insights", href: "/dashboard/post-insights" },
+  { icon: LineChart, label: "Engagement Trends", href: "/dashboard/engagement-trends" },
+  { icon: MessageSquare, label: "Chat", href: "/dashboard/chat" },
 ];
 
 interface SidebarProps {
@@ -27,10 +19,10 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [collapsed, setCollapsed] = React.useState(false);
+  const location = useLocation();
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 lg:hidden"
@@ -38,7 +30,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar */}
       <div
         className={cn(
           "fixed top-0 left-0 z-50 h-screen w-64 bg-[#18181B] transition-all duration-300 ease-in-out lg:relative lg:translate-x-0",
@@ -51,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             {collapsed ? (
               <div className="w-8 h-8 rounded-full flex items-center justify-center">
                 <span className="text-sidebar-primary-foreground text-xl font-bold">
-                  <img src={logo} />
+                  <img src={logo} alt="Logo" />
                 </span>
               </div>
             ) : (
@@ -88,7 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 to={item.href}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground hover:text-white hover:bg-[#27272A]",
-                  item.active && "bg-gray-700 text-white"
+                  location.pathname === item.href && "bg-gray-700 text-white"
                 )}
               >
                 <item.icon className="h-4 w-4 flex-shrink-0" />
@@ -102,7 +93,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </nav>
 
           <div className="p-4">
-            <Link to={"/"}>
+            <Link to="/">
               <Button
                 variant="ghost"
                 className={cn(
@@ -122,3 +113,4 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     </>
   );
 };
+
