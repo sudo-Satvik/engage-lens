@@ -16,7 +16,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [metrics, setMetrics] = useState<EngagementMetrics[]>([]);
   const [error, setError] = useState<string | null>(null);
-  
   const fetchData = async () => {
     try {
       setLoading(true);
