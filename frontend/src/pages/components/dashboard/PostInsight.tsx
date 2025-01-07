@@ -17,8 +17,8 @@ export default function PostInsight() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl lg:text-2xl font-bold tracking-tight">Post Insights</h2>
-        <h3 className="text-md text-gray-400 tracking-tight">Detailed analysis of your posts</h3>
+        <h2 className="text-xl lg:text-2xl font-bold tracking-tight">Post Engagement Overview</h2>
+        <h3 className="text-md text-gray-400 tracking-tight">Average Interaction Types</h3>
       </div>
       <MetricCards isLoading={isLoading} metrics={metrics} allPosts={allPosts} />
       <LineGraph isLoading={isLoading} data={allPosts} />
