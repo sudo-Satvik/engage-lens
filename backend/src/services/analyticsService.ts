@@ -41,5 +41,6 @@ export const getEngagementMetrics = (): Promise<EngagementMetrics[]> => {
 
 export const getAllPost = async () => {
   const collection = getCollection("engagement_metrics");
-  return collection.find({}).sort({ timestamp: -1 }).toArray();
+  const result = await collection.find({}).toArray();
+  return result;
 };

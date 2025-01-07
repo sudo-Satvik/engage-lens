@@ -47,7 +47,7 @@ const sampleData = generateSampleData();
 
 interface LineGraphProps {
   isLoading: boolean;
-  data?: any[]; // Make data optional since we're using sample data
+  data?: any; // Make data optional since we're using sample data
 }
 
 export const LineGraph: React.FC<LineGraphProps> = ({ isLoading }) => {
