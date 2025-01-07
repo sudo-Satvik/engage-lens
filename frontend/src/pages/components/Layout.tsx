@@ -6,7 +6,7 @@ const Layout = () => {
   const location = useLocation();
 
   // List of routes where Navbar and Footer should be hidden
-  const hiddenRoutes = ["/dashboard", "/dashboard/insights", "/dashboard/trends", "/dashboard/chat"];
+  const hiddenRoutes = ["/dashboard", "/dashboard/post-insights", "/dashboard/engagement-trends", "/dashboard/chat"];
 
   // Check if the current path matches any of the hidden routes
   const shouldHideNavbarFooter = hiddenRoutes.includes(location.pathname);
