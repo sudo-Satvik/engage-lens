@@ -23,8 +23,8 @@ const PostTable = () => {
         "http://localhost:8000/api/analytics/all-posts"
       )
       if (postResponse.data && postResponse.data.length > 0) {
-        // Ensure we're getting all the data from the response
         setAllPosts(postResponse.data)
+        console.log("All posts:", postResponse.data.length, postResponse.data)
       } else {
         const mockResponse = await axios.post(
           "http://localhost:8000/api/analytics/generate-mock-data",
@@ -33,7 +33,6 @@ const PostTable = () => {
         if (!mockResponse.data) {
           throw new Error("Error generating mock data")
         }
-        // Store all mock data
         setAllPosts(mockResponse.data)
       }
     } catch (error) {
@@ -47,7 +46,7 @@ const PostTable = () => {
       setIsLoading(false)
     }
   }
-  console.log(allPosts.length) 
+
   useEffect(() => {
     fetchData()
   }, [])
@@ -137,24 +136,19 @@ const PostTable = () => {
     <div className="space-y-8">
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Post Engagement Table</h2>
-          <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-500">
-              Total Posts: {allPosts.length}
-            </div>
-            <Button onClick={downloadCSV} disabled={isLoading}>
-              <Download className="mr-2 h-4 w-4" />
-              Download CSV
-            </Button>
+          <div>
+            <h2 className="text-xl lg:text-2xl font-bold tracking-tight">All Posts Overview</h2>
+            <h3 className="text-md text-gray-400 tracking-tight">Individual Posts Records</h3>
           </div>
+          <Button onClick={downloadCSV} disabled={isLoading}>
+            <Download className="mr-2 h-4 w-4" />
+            Download CSV
+          </Button>
         </div>
         {isLoading ? (
           <SkeletonTable />
         ) : (
-          <DataTable 
-            columns={columns} 
-            data={allPosts} // Set initial page size to show all records
-          />
+          <DataTable columns={columns} data={allPosts} />
         )}
       </div>
     </div>
@@ -162,3 +156,4 @@ const PostTable = () => {
 }
 
 export default PostTable
+

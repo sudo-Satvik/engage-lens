@@ -5,6 +5,8 @@ import axios from "axios";
 import { Sidebar } from "@/pages/components/Sidebar";
 import { EngagementData, EngagementMetrics } from "@/types/engagementType";
 import { Card } from "@/components/ui/card";
+import { Menu } from "lucide-react"; // Import Menu icon
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -12,6 +14,8 @@ export default function Dashboard() {
   const [allPosts, setAllPosts] = useState<EngagementData[]>([]);
   const [metrics, setMetrics] = useState<EngagementMetrics[]>([]);
   const [error, setError] = useState<string | null>(null);
+  
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   
   const fetchData = async () => {
     try {
@@ -32,7 +36,7 @@ export default function Dashboard() {
       } else {
         const mockResponse = await axios.post(
           "http://localhost:8000/api/analytics/generate-mock-data",
-          { count: 200 }
+          { count: 50 }
         );
         if (!mockResponse.data) {
           throw new Error("Error generating mock data");
@@ -78,8 +82,32 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      {/* Mobile Menu Button */}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={toggleSidebar}
+        className={`
+          fixed top-2 left-4 z-50 lg:hidden
+          bg-[#18181B] text-white
+          hover:bg-gray-700 hover:text-white
+          ring-2 ring-white/20 shadow-lg
+          transition-all duration-200
+          hover:ring-white/40 hover:scale-105
+          active:scale-95
+        `}
+        aria-label="Toggle menu"
+      >
+        <Menu className="h-6 w-6" />
+      </Button>
+
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)}
+        onToggle={toggleSidebar}
+      />
+      
+      <div className="flex-1 flex flex-col overflow-hidden mt-[3.5rem] ml-0 lg:ml-0 sm:ml-10 sm:mt-10">
         <main className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
           <Outlet context={{ isLoading, metrics, allPosts }} />
         </main>
