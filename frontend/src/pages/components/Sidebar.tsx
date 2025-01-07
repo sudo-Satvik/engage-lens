@@ -7,14 +7,16 @@ import {
   MessageSquare,
   LogOut,
   BarChart2,
-  Sidebar as SidebarIcon,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import {Link} from "react-router-dom";
+import logo from "@/assets/logo-dark.svg";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/", active: true },
-  { icon: BarChart2, label: "Post Insights", href: "/insights" },
-  { icon: LineChart, label: "Engagement Trends", href: "/trends" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", active: true },
+  { icon: BarChart2, label: "Post Insights", href: "/post-insights" },
+  { icon: LineChart, label: "Engagement Trends", href: "/engagement-trend" },
   { icon: MessageSquare, label: "Chat", href: "/chat" },
 ];
 
@@ -39,7 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed top-0 left-0 z-50 h-screen w-64 bg-gray-800 transition-all duration-300 ease-in-out lg:relative lg:translate-x-0",
+          "fixed top-0 left-0 z-50 h-screen w-64 bg-[#18181B] transition-all duration-300 ease-in-out lg:relative lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full",
           collapsed ? "lg:w-16" : "lg:w-64"
         )}
@@ -47,8 +49,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between p-4">
             {collapsed ? (
-              <div className="w-8 h-8 rounded-full bg-sidebar-primary flex items-center justify-center">
-                <span className="text-sidebar-primary-foreground text-xl font-bold">E</span>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                <span className="text-sidebar-primary-foreground text-xl font-bold">
+                  <img src={logo} />
+                </span>
               </div>
             ) : (
               <h1 className="font-bold text-xl text-sidebar-foreground">
@@ -59,12 +63,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               variant="ghost"
               size="icon"
               onClick={() => setCollapsed(!collapsed)}
-              className="hidden lg:flex absolute -right-3 top-7 h-6 w-6 rounded-full border bg-black p-1 text-sidebar-foreground"
+              className="hidden lg:flex absolute -right-5 top-7 h-6 w-6 rounded-full border bg-black p-4 text-sidebar-foreground"
             >
               {collapsed ? (
-                <SidebarIcon className="h-4 w-4" />
+                <ChevronRight className="h-5 w-4" />
               ) : (
-                <SidebarIcon className="h-4 w-4" />
+                <ChevronLeft className="h-4 w-4" />
               )}
             </Button>
             <Button
@@ -83,13 +87,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 key={item.label}
                 to={item.href}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground transition-all hover:text-sidebar-primary",
-                  item.active && "bg-sidebar-accent text-sidebar-primary"
+                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sidebar-foreground hover:text-white hover:bg-[#27272A]",
+                  item.active && "bg-gray-700 text-white"
                 )}
               >
                 <item.icon className="h-4 w-4 flex-shrink-0" />
                 {!collapsed && (
-                  <span className="transition-all duration-300">
+                  <span className="duration-300">
                     {item.label}
                   </span>
                 )}
@@ -98,18 +102,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </nav>
 
           <div className="p-4">
-            <Button
-              variant="ghost"
-              className={cn(
-                "w-full flex items-center gap-3 px-3 py-2 text-sidebar-foreground hover:text-sidebar-primary",
-                collapsed ? "justify-center" : "justify-start"
-              )}
-            >
-              <LogOut className="h-4 w-4 flex-shrink-0" />
-              {!collapsed && (
-                <span className="transition-all duration-300">Logout</span>
-              )}
-            </Button>
+            <Link to={"/"}>
+              <Button
+                variant="ghost"
+                className={cn(
+                  "w-full flex items-center gap-3 px-3 py-2 text-sidebar-foreground hover:text-white",
+                  collapsed ? "justify-center" : "justify-start"
+                )}
+              >
+                <LogOut className="h-4 w-4 flex-shrink-0" />
+                {!collapsed && (
+                  <span className="duration-300">Back to Landing Page</span>
+                )}
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

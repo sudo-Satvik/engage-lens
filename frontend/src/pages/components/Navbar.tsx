@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-dark.svg";
 import { Link } from "react-router";
+import { Sidebar } from "lucide-react";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -111,21 +112,21 @@ const Navbar = () => {
 
           {/* Right Buttons */}
           <div className="hidden md:flex items-center space-x-2">
-            <Link to={"/login"}>
+            {/* <Link to={"/login"}>
               <Button
                 size="sm"
                 className="relative group overflow-hidden px-4 py-2 hover:bg-gray-700"
               >
                 <span className="relative z-10">Login</span>
               </Button>
-            </Link>
-            <Link to={"/register"}>
+            </Link> */}
+            <Link to={"/dashboard"}>
               <Button
                 variant="outline"
                 className="relative group overflow-hidden px-4 py-2 border-2 border-white bg-white text-black hover:bg-transparent hover:text-white transition-all duration-300"
                 size="sm"
               >
-                <span className="relative z-10">Get Started</span>
+                <span className="relative z-10 flex gap-2"><Sidebar /> Dashboard</span>
               </Button>
             </Link>
           </div>
