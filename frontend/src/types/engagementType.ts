@@ -14,3 +14,10 @@ export interface EngagementMetrics {
     avgComments: number;
     count: number;
 }
+
+export interface AllPost {
+    currentPage: number;
+    posts: EngagementData[];
+    totalPages: number;
+    totalPosts: number;
+}

@@ -3,11 +3,19 @@ import { EngagementModel } from "../models/engagementModel";
 import { EngagementData, EngagementMetrics } from "../types/index";
 import { getCollection } from "../config/database";
 
+
+const generateRandomDate = (start: Date, end: Date) => {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
 export const generateMockData = async (
-  count: number = 50
+  count: number = 200
 ): Promise<EngagementData[]> => {
   const postTypes = ["static", "reel", "carousel"];
   const mockData: EngagementData[] = [];
+  const endDate = new Date();
+  const startDate = new Date(endDate.getFullYear() - 1, endDate.getMonth(), endDate.getDate());
+
 
   for (let i = 0; i < count; i++) {
     mockData.push({
@@ -16,7 +24,7 @@ export const generateMockData = async (
       likes: Math.floor(Math.random() * 1000),
       shares: Math.floor(Math.random() * 200),
       comments: Math.floor(Math.random() * 100),
-      timestamp: Date.now(),
+      timestamp: generateRandomDate(startDate, endDate).getTime(),
     });
   }
   await EngagementModel.insertMany(mockData);
@@ -41,5 +49,6 @@ export const getEngagementMetrics = (): Promise<EngagementMetrics[]> => {
 
 export const getAllPost = async () => {
   const collection = getCollection("engagement_metrics");
-  return collection.find({}).sort({ timestamp: -1 }).toArray();
+  const result = await collection.find({}).toArray();
+  return result;
 };

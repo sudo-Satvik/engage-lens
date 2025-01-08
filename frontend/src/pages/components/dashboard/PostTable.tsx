@@ -8,44 +8,51 @@ import { SkeletonTable } from '@/components/dashboard/skeleton-table'
 import { ColumnDef } from '@tanstack/react-table'
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown, Download } from 'lucide-react'
+import { Pagination } from '@/components/ui/pagination'
+
+interface PostResponse {
+  posts: EngagementData[];
+  currentPage: number;
+  totalPages: number;
+  totalPosts: number;
+}
 
 const PostTable = () => {
   const [allPosts, setAllPosts] = useState<EngagementData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
 
-  const fetchData = async () => {
+  const fetchData = async (page: number = 1) => {
     try {
-      setIsLoading(true)
-      setError(null)
+      setIsLoading(true);
+      setError(null);
 
-      const postResponse = await axios.get(
-        "http://localhost:8000/api/analytics/all-posts"
-      )
-      if (postResponse.data && postResponse.data.length > 0) {
-        setAllPosts(postResponse.data)
-        console.log("All posts:", postResponse.data.length, postResponse.data)
+      const postResponse = await axios.get<PostResponse>(
+        `http://localhost:8000/api/analytics/all-posts?page=${page}&limit=50`
+      );
+      
+      if (postResponse.data && postResponse.data.posts) {
+        setAllPosts(postResponse.data.posts);
+        setCurrentPage(postResponse.data.currentPage);
+        setTotalPages(postResponse.data.totalPages);
+        setTotalPosts(postResponse.data.totalPosts);
       } else {
-        const mockResponse = await axios.post(
-          "http://localhost:8000/api/analytics/generate-mock-data",
-          { count: 200 }
-        )
-        if (!mockResponse.data) {
-          throw new Error("Error generating mock data")
-        }
-        setAllPosts(mockResponse.data)
+        throw new Error("Failed to fetch posts");
       }
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error("Error in fetchData:", error);
       setError(
         error instanceof Error
           ? error.message
           : "Failed to fetch data. Please try again."
-      )
+      );
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchData()
@@ -107,6 +114,11 @@ const PostTable = () => {
         )
       },
     },
+    {
+      accessorFn: (row) => new Date(row.timestamp).toLocaleDateString(),
+      id: "timestamp",
+      header: "Date",
+    },
   ]
 
   const downloadCSV = () => {
@@ -148,7 +160,22 @@ const PostTable = () => {
         {isLoading ? (
           <SkeletonTable />
         ) : (
-          <DataTable columns={columns} data={allPosts} />
+          <>
+            <DataTable 
+              columns={columns} 
+              data={allPosts}
+              pagination={
+                <Pagination 
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={fetchData}
+                />
+              }
+            />
+            <div className="text-sm text-muted-foreground mt-2">
+              Total Posts: {totalPosts}
+            </div>
+          </>
         )}
       </div>
     </div>

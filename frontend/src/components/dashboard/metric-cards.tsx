@@ -1,22 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { 
-  ThumbsUp, 
-  Share2, 
-  MessageCircle, 
-  TrendingUp, 
-  TrendingDown,
-  Image,
-  Video,
-  Images
-} from 'lucide-react';
+import { ThumbsUp, Share2, MessageCircle, TrendingUp, TrendingDown, Image, Video, Images } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { EngagementData, EngagementMetrics } from '@/types/engagementType';
+import { AllPost, EngagementMetrics } from '@/types/engagementType';
 
 interface MetricCardsProps {
   isLoading: boolean;
   metrics?: EngagementMetrics[];
-  allPosts?: EngagementData[];
+  allPosts?: AllPost;
 }
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
@@ -34,17 +25,19 @@ const getContentTypeIcon = (type: string) => {
   }
 };
 
-export function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) {
+export default function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) {
   const calculateEngagementMetrics = () => {
-    if (!allPosts?.length) return { totalPosts: 0, distributions: [], engagement: {} };
+    if (!Array.isArray(allPosts?.posts) || allPosts.posts.length === 0) {
+      return { totalPosts: 0, totalEngagement: 0, distributions: [], changes: {} };
+    }
 
-    const totalPosts = allPosts.length;
-    
-    const totalEngagement = allPosts.reduce((acc, post) => {
+    const totalPosts = allPosts.posts.length;
+    console.log("metrics", metrics);
+    const totalEngagement = allPosts.posts.reduce((acc, post) => {
       return acc + post.likes + post.shares + post.comments;
     }, 0);
 
-    const postTypeCount = allPosts.reduce((acc, post) => {
+    const postTypeCount = allPosts.posts.reduce((acc, post) => {
       acc[post.postType] = (acc[post.postType] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
@@ -54,7 +47,7 @@ export function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) 
       value
     }));
 
-    const engagementByType = allPosts.reduce((acc, post) => {
+    const engagementByType = allPosts.posts.reduce((acc, post) => {
       if (!acc[post.postType]) {
         acc[post.postType] = {
           likes: 0,
@@ -134,19 +127,19 @@ export function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) 
                 <div className="flex items-center gap-1">
                   <ThumbsUp className="h-4 w-4 text-blue-500" />
                   <span className="text-sm text-muted-foreground">
-                    {allPosts?.reduce((sum, post) => sum + post.likes, 0).toLocaleString()}
+                    {Array.isArray(allPosts?.posts) ? allPosts.posts.reduce((sum, post) => sum + post.likes, 0).toLocaleString() : '0'}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Share2 className="h-4 w-4 text-green-500" />
                   <span className="text-sm text-muted-foreground">
-                    {allPosts?.reduce((sum, post) => sum + post.shares, 0).toLocaleString()}
+                    {Array.isArray(allPosts?.posts) ? allPosts.posts.reduce((sum, post) => sum + post.shares, 0).toLocaleString() : '0'}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MessageCircle className="h-4 w-4 text-purple-500" />
                   <span className="text-sm text-muted-foreground">
-                    {allPosts?.reduce((sum, post) => sum + post.comments, 0).toLocaleString()}
+                    {Array.isArray(allPosts?.posts) ? allPosts.posts.reduce((sum, post) => sum + post.comments, 0).toLocaleString() : '0'}
                   </span>
                 </div>
               </div>
@@ -193,7 +186,7 @@ export function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) 
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {distributions.map((entry, index) => (
+                    {distributions.map((_, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
@@ -208,3 +201,4 @@ export function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) 
     </div>
   );
 }
+
