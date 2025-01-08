@@ -10,19 +10,27 @@ import { Button } from "@/components/ui/button"
 import { ArrowUpDown, Download } from 'lucide-react'
 import { Pagination } from '@/components/ui/pagination'
 
+interface PostResponse {
+  posts: EngagementData[];
+  currentPage: number;
+  totalPages: number;
+  totalPosts: number;
+}
+
 const PostTable = () => {
   const [allPosts, setAllPosts] = useState<EngagementData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   const fetchData = async (page: number = 1) => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const postResponse = await axios.get(
+      const postResponse = await axios.get<PostResponse>(
         `http://localhost:8000/api/analytics/all-posts?page=${page}&limit=50`
       );
       
@@ -30,6 +38,7 @@ const PostTable = () => {
         setAllPosts(postResponse.data.posts);
         setCurrentPage(postResponse.data.currentPage);
         setTotalPages(postResponse.data.totalPages);
+        setTotalPosts(postResponse.data.totalPosts);
       } else {
         throw new Error("Failed to fetch posts");
       }
@@ -105,6 +114,11 @@ const PostTable = () => {
         )
       },
     },
+    {
+      accessorFn: (row) => new Date(row.timestamp).toLocaleDateString(),
+      id: "timestamp",
+      header: "Date",
+    },
   ]
 
   const downloadCSV = () => {
@@ -158,6 +172,9 @@ const PostTable = () => {
                 />
               }
             />
+            <div className="text-sm text-muted-foreground mt-2">
+              Total Posts: {totalPosts}
+            </div>
           </>
         )}
       </div>

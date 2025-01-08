@@ -65,7 +65,7 @@ export default function MetricCards({ isLoading, metrics, allPosts }: MetricCard
 
     const totalAvg = totalEngagement / totalPosts;
     const changes = Object.entries(engagementByType).reduce((acc, [type, data]) => {
-      const typeAvg = (data.shares + data.shares + data.comments) / data.count;
+      const typeAvg = (data.likes + data.shares + data.comments) / data.count;
       acc[type] = ((typeAvg - totalAvg) / totalAvg) * 100;
       return acc;
     }, {} as Record<string, number>);
