@@ -7,6 +7,11 @@ export function MacbookScrollDemo() {
   return (
     <div className="overflow-hidden bg-[#0B0B0F] w-full">
       <MacbookScroll
+        title={
+        <span>
+          Turning social media data into insights <br /> Effortlessly!
+        </span>
+        }
         src={img}
         showGradient={false}
       />
