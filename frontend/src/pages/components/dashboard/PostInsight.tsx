@@ -13,8 +13,6 @@ interface DashboardContext {
 
 export default function PostInsight() {
   const { isLoading, metrics, allPosts } = useOutletContext<DashboardContext>();
-  console.log("metrics", metrics);
-  console.log("allPosts", allPosts);
   return (
     <div className="space-y-6">
       <div>

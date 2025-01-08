@@ -27,7 +27,6 @@ const PostTable = () => {
       );
       
       if (postResponse.data && postResponse.data.posts) {
-        console.log("Posts loaded:", postResponse.data.posts.length);
         setAllPosts(postResponse.data.posts);
         setCurrentPage(postResponse.data.currentPage);
         setTotalPages(postResponse.data.totalPages);
@@ -45,6 +44,7 @@ const PostTable = () => {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData()
   }, [])
@@ -147,14 +147,18 @@ const PostTable = () => {
           <SkeletonTable />
         ) : (
           <>
-          <DataTable columns={columns} data={allPosts} />
-          <Pagination 
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={fetchData}
-          />
+            <DataTable 
+              columns={columns} 
+              data={allPosts}
+              pagination={
+                <Pagination 
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={fetchData}
+                />
+              }
+            />
           </>
-          
         )}
       </div>
     </div>

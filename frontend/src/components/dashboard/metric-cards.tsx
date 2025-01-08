@@ -27,19 +27,17 @@ const getContentTypeIcon = (type: string) => {
 
 export default function MetricCards({ isLoading, metrics, allPosts }: MetricCardsProps) {
   const calculateEngagementMetrics = () => {
-    if (!Array.isArray(allPosts) || allPosts.length === 0) {
+    if (!Array.isArray(allPosts?.posts) || allPosts.posts.length === 0) {
       return { totalPosts: 0, totalEngagement: 0, distributions: [], changes: {} };
     }
 
-    const totalPosts = allPosts.length;
-    console.log("totalPosts", totalPosts);
+    const totalPosts = allPosts.posts.length;
     console.log("metrics", metrics);
-
-    const totalEngagement = allPosts.reduce((acc, post) => {
+    const totalEngagement = allPosts.posts.reduce((acc, post) => {
       return acc + post.likes + post.shares + post.comments;
     }, 0);
 
-    const postTypeCount = allPosts.reduce((acc, post) => {
+    const postTypeCount = allPosts.posts.reduce((acc, post) => {
       acc[post.postType] = (acc[post.postType] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
@@ -129,19 +127,19 @@ export default function MetricCards({ isLoading, metrics, allPosts }: MetricCard
                 <div className="flex items-center gap-1">
                   <ThumbsUp className="h-4 w-4 text-blue-500" />
                   <span className="text-sm text-muted-foreground">
-                    {Array.isArray(allPosts) ? allPosts.reduce((sum, post) => sum + post.likes, 0).toLocaleString() : '0'}
+                    {Array.isArray(allPosts?.posts) ? allPosts.posts.reduce((sum, post) => sum + post.likes, 0).toLocaleString() : '0'}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Share2 className="h-4 w-4 text-green-500" />
                   <span className="text-sm text-muted-foreground">
-                    {Array.isArray(allPosts) ? allPosts.reduce((sum, post) => sum + post.shares, 0).toLocaleString() : '0'}
+                    {Array.isArray(allPosts?.posts) ? allPosts.posts.reduce((sum, post) => sum + post.shares, 0).toLocaleString() : '0'}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MessageCircle className="h-4 w-4 text-purple-500" />
                   <span className="text-sm text-muted-foreground">
-                    {Array.isArray(allPosts) ? allPosts.reduce((sum, post) => sum + post.comments, 0).toLocaleString() : '0'}
+                    {Array.isArray(allPosts?.posts) ? allPosts.posts.reduce((sum, post) => sum + post.comments, 0).toLocaleString() : '0'}
                   </span>
                 </div>
               </div>
