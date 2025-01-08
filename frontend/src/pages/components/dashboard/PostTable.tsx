@@ -24,6 +24,7 @@ const PostTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
 
   const fetchData = async (page: number = 1) => {
     try {
@@ -31,7 +32,7 @@ const PostTable = () => {
       setError(null);
 
       const postResponse = await axios.get<PostResponse>(
-        `http://localhost:8000/api/analytics/all-posts?page=${page}&limit=50`
+        `http://localhost:8000/api/analytics/all-posts?page=${page}&limit=${rowsPerPage}`
       );
       
       if (postResponse.data && postResponse.data.posts) {
@@ -56,7 +57,7 @@ const PostTable = () => {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [rowsPerPage])
 
   const columns: ColumnDef<EngagementData>[] = [
     {
@@ -140,6 +141,12 @@ const PostTable = () => {
     }
   }
 
+  const handleRowsPerPageChange = (value: number) => {
+    setRowsPerPage(value);
+    setCurrentPage(1); // Reset to first page when changing rows per page
+    fetchData(1);
+  };
+
   if (error) {
     return <div>Error: {error}</div>
   }
@@ -171,6 +178,8 @@ const PostTable = () => {
                   onPageChange={fetchData}
                 />
               }
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleRowsPerPageChange}
             />
             <div className="text-sm text-muted-foreground mt-2">
               Total Posts: {totalPosts}

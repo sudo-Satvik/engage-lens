@@ -174,54 +174,52 @@ const LandingPage: React.FC = () => {
 
       {/* How It Works Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8" id="work">
-        <h2 className="text-4xl font-bold text-center mb-16">How It Works</h2>
-        <div className="max-w-4xl mx-auto">
-          {[
-            {
-              title: "Connect Your Accounts",
-              description:
-                "Easily link your social media accounts to our secure platform.",
-            },
-            {
-              title: "Data Collection & Processing",
-              description:
-                "We fetch and process your engagement data using advanced algorithms.",
-            },
-            {
-              title: "AI-Powered Analysis",
-              description:
-                "Our AI analyzes your data to uncover trends and insights.",
-            },
-            {
-              title: "Generate Custom Reports",
-              description:
-                "Create detailed reports tailored to your specific needs and goals.",
-            },
-            {
-              title: "Implement Strategies",
-              description:
-                "Use our actionable insights to refine your social media strategy.",
-            },
-          ].map((step, index) => (
-            <motion.div
-              key={step.title}
-              className="flex items-start mb-12"
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center mr-6 flex-shrink-0">
-                {index + 1}
-              </div>
-              <div>
-                <h3 className="text-2xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-gray-400 text-lg">{step.description}</p>
-              </div>
-            </motion.div>
-          ))}
+  <h2 className="text-4xl font-bold text-center mb-16">How It Works</h2>
+  <div className="max-w-4xl mx-auto">
+    {[
+      {
+        title: "Data Aggregation and Display",
+        description:
+          "Our system fetches real-time engagement metrics, categorizing data into totals, growth metrics, and distribution.",
+      },
+      {
+        title: "Visualize Engagement Trends",
+        description:
+          "Get a clear overview of your performance with visual charts for metrics like total engagements, post distribution, and growth trends.",
+      },
+      {
+        title: "Dive Into Analytics by Category",
+        description:
+          "Understand which post types—static, carousel, or reels—are driving the most engagement with detailed growth metrics.",
+      },
+      {
+        title: "Make Data-Driven Decisions",
+        description:
+          "Leverage insights from our dashboard to refine your content strategy and achieve better engagement.",
+      },
+    ].map((step, index) => (
+      <motion.div
+        key={step.title}
+        className="flex items-start mb-12"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+      >
+        <div className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center mr-6 flex-shrink-0">
+          {index + 1}
         </div>
-      </section>
+        <div>
+          <h3 className="text-2xl font-semibold mb-3">{step.title}</h3>
+          <p className="text-gray-400 text-lg">{step.description}</p>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* About Us Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800" id="about">
