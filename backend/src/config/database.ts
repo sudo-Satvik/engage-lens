@@ -48,7 +48,12 @@ export const connectDatabase = async () => {
     if(collections.length === 0){
       const COLLECTION_NAME: FullCollectionInfo = {
         name: "engagement_metrics",
-        options: {}
+        options: {
+          vector: {
+            dimension: 1536,
+            metric: "cosine"
+          }
+        }
       };
   
       // Check if collection exists

@@ -24,26 +24,27 @@ export function AiChat({isLoading}: AiChatProps) {
 
   const handleMessage = async () => {
     if(message.trim() && !isSending){
-      setIsSending(true);
-      const newMessage: ChatMessage = { role: 'user', content: message };
-      setChatHistory([...chatHistory, newMessage]);
-      setMessage('');
+      setIsSending(true)
+      const newMessage: ChatMessage = { role: 'user', content: message }
+      setChatHistory([...chatHistory, newMessage])
+      setMessage('')
 
       try {
-        const response = await axios.post('http://localhost:8000/api/analytics/chat', {
+        const response = await axios.post('/api/analytics/chat', {
           message,
           history: chatHistory
-        });
+        })
         const aiResponse: ChatMessage = {role: "ai", content: response.data.message}
-        setChatHistory(prevHistory => [...prevHistory, aiResponse]);
+        setChatHistory(prevHistory => [...prevHistory, aiResponse])
       } catch (error) {
-        console.error("Error sending message:", error);
-        setChatHistory(prevHistory => [...prevHistory, { role: 'ai', content: 'Sorry, I encountered an error. Please try again.' }]);
+        console.error("Error sending message:", error)
+        setChatHistory(prevHistory => [...prevHistory, { role: 'ai', content: 'Sorry, I encountered an error. Please try again.' }])
       } finally {
-        setIsSending(false);
+        setIsSending(false)
       }
     }
   }
+
 
   return(
     <Card className="col-span-1 lg:col-span-2 bg-card flex flex-col">

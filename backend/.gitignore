@@ -23,6 +23,7 @@ lib-cov
 coverage
 *.lcov
 
+engagement_data.csv
 # nyc test coverage
 .nyc_output
 
