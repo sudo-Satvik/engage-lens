@@ -14,7 +14,7 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Link } from "react-router";
 import { Sidebar } from "lucide-react";
 import {MacbookScrollDemo} from "@/components/Showcase";
-
+import { Vortex } from "@/components/ui/vortex";
 
 const LandingPage: React.FC = () => {
   const fadeIn = {
@@ -228,8 +228,8 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 text-center bg-gradient-to-r from-blue-900 to-purple-900" >
-        <h2 className="text-4xl font-bold mb-6">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 text-center bg-black" >
+        {/* <h2 className="text-4xl font-bold mb-6">
           Ready to Analyze Your Social Media?
         </h2>
         <p className="text-xl text-gray-300 mb-8">
@@ -240,7 +240,26 @@ const LandingPage: React.FC = () => {
           <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-200">
             Navigate to Dashboard
           </Button>
+        </Link> */}
+        <div className="w-[100%] mx-auto rounded-md  h-[30rem] overflow-hidden">
+        <Vortex
+          backgroundColor="black"
+          className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
+        >
+          <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
+          Ready to Analyze Your Social Media?
+          </h2>
+          <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center">
+          Join thousands of businesses already leveraging our AI-powered
+          analytics platform.
+          </p>
+          <Link to={"/dashboard"}>
+          <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-200 mt-4">
+            Navigate to Dashboard
+          </Button>
         </Link>
+        </Vortex>
+      </div>
       </section>
     </div>
   );
