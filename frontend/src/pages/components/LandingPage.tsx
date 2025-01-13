@@ -14,6 +14,9 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Link } from "react-router";
 import { Sidebar } from "lucide-react";
 import {MacbookScrollDemo} from "@/components/Showcase";
+import satvikImage from '../../assets/satvik-sharma.png';
+import sahilImage from '../../assets/sahil-sharma.png';
+import devendraImage from '../../assets/devendra-kumar.png';
 
 
 const LandingPage: React.FC = () => {
@@ -27,7 +30,7 @@ const LandingPage: React.FC = () => {
         "Contributed to both the frontend and backend development, ensuring a smooth and user-friendly experience",
       name: "Satvik Sharma",
       designation: "Full Stack & UI/UX Developer",
-      src: "src/assets/satvik-sharma.png",
+      src: satvikImage,
       github: "https://github.com/sudo-Satvik",
       linkedin: "https://www.linkedin.com/in/satvik-sharmaaa/",
     },
@@ -36,7 +39,7 @@ const LandingPage: React.FC = () => {
         "Expertise in Langflow and AI contributed significantly to enhancing the project's data handling and automation capabilities",
       name: "Sahil Sharma",
       designation: "Backend Developer & AI Expert",
-      src: "src/assets/sahil-sharma.png",
+      src: sahilImage,
       github: "https://github.com/SAHIL-Sharma21",
       linkedin: "https://www.linkedin.com/in/sahil-sharma2001/",
     },
@@ -45,7 +48,7 @@ const LandingPage: React.FC = () => {
         "Played a pivotal role in designing the user interface, ensuring an intuitive and visually appealing experience",
       name: "Devendra Kumar",
       designation: "Frontend & UI Designer",
-      src: "src/assets/devendra-kumar.png",
+      src: devendraImage,
       github: "https://github.com/KumaDevendra",
       linkedin: "https://www.linkedin.com/in/devendra-kumar-aa66bb224/",
     },
