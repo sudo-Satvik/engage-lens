@@ -17,6 +17,7 @@ import { MacbookScrollDemo } from "@/components/Showcase";
 import satvikImage from "../../assets/satvik-sharma.png";
 import sahilImage from "../../assets/sahil-sharma.png";
 import devendraImage from "../../assets/devendra-kumar.png";
+
 import { Vortex } from "@/components/ui/vortex";
 
 const LandingPage: React.FC = () => {
