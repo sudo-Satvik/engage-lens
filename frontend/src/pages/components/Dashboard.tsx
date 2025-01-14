@@ -24,13 +24,13 @@ export default function Dashboard() {
 
       // Fetch metrics data
       const metricsResponse = await axios.get(
-        "http://localhost:8000/api/analytics/engagement-metrics"
+        "https://engage-lens-backend.onrender.com/api/analytics/engagement-metrics"
       );
       setMetrics(metricsResponse.data || []);
 
       // Fetch posts data
       const postResponse = await axios.get(
-        "http://localhost:8000/api/analytics/all-posts"
+        "https://engage-lens-backend.onrender.com/api/analytics/all-posts"
       );
       setAllPosts(postResponse.data || []);
       
