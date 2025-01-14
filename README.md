@@ -1,11 +1,31 @@
 <img src="./frontend/src/assets/logo-light.png" alt="EngageLens Logo" width="100px">
 
 
-# EngageLens by Team ANiMAXiO 
+# EngageLens - AI Based Social Media Analyzer Web App
 
 A powerful social media analytics platform that provides deep insights into your social media engagement through an AI-powered lens. Built for the **Level Supermind Hackathon**, EngageLens leverages **DataStax Astra DB** and **Langflow** to analyze engagement data and deliver actionable insights.  
 
 ---
+
+## 📸 Glimpses:
+
+### Landing Page
+![Landing Page ScreenShot](landing-page.png)
+
+### The macbook effect!!!
+![Macbook Effect Video Gif](macbook-effect.gif)
+
+### Main Dashboard
+![Main Dashboard ScreenShot](main-dashboard.png)
+
+### Each Post Details
+![Each Post Details ScreenShot](each-post-detail.png)
+
+### Engagement Trends 
+![Engagement Trends Over Time ScreenShot](engagement-trends.png)
+
+### AI ChatBot which helps users to get insights
+![AI Chat Page ScreenShot](ai-page.png)
 
 ## 👁️ About EngageLens  
 
@@ -127,12 +147,11 @@ npm run dev
 ## 🎯 Vision
 EngageLens aims to revolutionize how creators and businesses understand and optimize their social media performance. By combining cutting-edge AI technology with robust analytics, we provide insights that are not just data points, but actionable strategies for growth.
 
-## 👥 Team ANiMAXiO
-Meet the minds behind EngageLens:
+## 👥 Meet the minds behind EngageLens:
 
-- [Devendra Kumar](https://github.com/KumaDevendra/)
-- [Sahil Sharma](https://github.com/SAHIL-Sharma21/)
 - [Satvik Sharma](https://github.com/sudo-Satvik/)
+- [Sahil Sharma](https://github.com/SAHIL-Sharma21/)
+- [Devendra Kumar](https://github.com/KumaDevendra/)
 
 <hr>
 <h3>Created with ❤️ by Team ANiMAXiO</h3>
