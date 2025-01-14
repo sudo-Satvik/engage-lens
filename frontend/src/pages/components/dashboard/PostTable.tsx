@@ -32,7 +32,7 @@ const PostTable = () => {
       setError(null);
 
       const postResponse = await axios.get<PostResponse>(
-        `http://localhost:8000/api/analytics/all-posts?page=${page}&limit=${rowsPerPage}`
+        `https://engage-lens-backend.onrender.com/api/analytics/all-posts?page=${page}&limit=${rowsPerPage}`
       );
       
       if (postResponse.data && postResponse.data.posts) {
