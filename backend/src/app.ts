@@ -18,7 +18,7 @@ import analyticsRouter from "./routes/routes";
 app.use("/api/analytics", analyticsRouter);
 
 app.get("/health", (req, res) => {
-  res.status(200).json({ message: "Server is healthy" });
+  res.status(200).json({ message: "Server is healthy!" });
 });
 
 export { app };
