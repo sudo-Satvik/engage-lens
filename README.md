@@ -10,22 +10,22 @@ A powerful social media analytics platform that provides deep insights into your
 ## 📸 Glimpses:
 
 ### Landing Page
-![Landing Page ScreenShot](landing-page.png)
+![Landing Page ScreenShot](/assets/landing-page.png)
 
 ### The macbook effect!!!
-![Macbook Effect Video Gif](macbook-effect.gif)
+![Macbook Effect Video Gif](/assets/macbook-effect.gif)
 
 ### Main Dashboard
-![Main Dashboard ScreenShot](main-dashboard.png)
+![Main Dashboard ScreenShot](/assets/main-dashboard.png)
 
 ### Each Post Details
-![Each Post Details ScreenShot](each-post-detail.png)
+![Each Post Details ScreenShot](/assets/each-post-detail.png)
 
 ### Engagement Trends 
-![Engagement Trends Over Time ScreenShot](engagement-trends.png)
+![Engagement Trends Over Time ScreenShot](/assets/engagement-trends.png)
 
 ### AI ChatBot which helps users to get insights
-![AI Chat Page ScreenShot](ai-page.png)
+![AI Chat Page ScreenShot](/assets/ai-page.png)
 
 ## 👁️ About EngageLens  
 
@@ -104,7 +104,7 @@ engage-lens/
 │   └── .gitignore        # Ignore list for frontend files
 ├── README.md             # Documentation for the project
 ├── LICENSE               # License file
-└── other-files           # Additional files or configuration
+└── assets/           
 ```
 
 
