@@ -87,11 +87,11 @@ export const analyticsController = {
       const { message, history } = req.body;
       console.log("Received chat request:", { message, history });
       
-      if (!message || !history) {
+      if (!message) {
         throw new Error("Missing required parameters: message or history");
       }
 
-      const chatResponse = await generateChatResponse(message, history);
+      const chatResponse = await generateChatResponse(message, history || []);
       console.log("Chat response generated:", chatResponse);
       
       res.json({ message: chatResponse });

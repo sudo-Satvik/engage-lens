@@ -38,6 +38,28 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
 }
 
 @layer base {
@@ -47,5 +69,83 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.prose {
+  max-width: 100%;
+  @apply text-gray-200;
+}
+
+.prose table {
+  @apply w-full border-collapse border border-gray-600;
+}
+
+.prose thead {
+  @apply bg-gray-700;
+}
+
+.prose th {
+  @apply px-4 py-2 text-left text-sm font-medium text-gray-300 bg-gray-800 border border-gray-600;
+}
+
+.prose td {
+  @apply px-4 py-2 text-sm text-gray-200 border border-gray-600;
+}
+
+.prose td:first-child {
+  @apply font-medium text-blue-300;
+}
+
+.prose code {
+  @apply bg-gray-800 text-yellow-300 px-1 rounded;
+}
+
+.prose pre {
+  @apply bg-gray-800 p-4 rounded-lg;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-sm text-yellow-300;
+}
+
+.prose a {
+  @apply text-blue-400 hover:text-blue-300;
+}
+
+.prose strong {
+  @apply text-gray-100;
+}
+
+.prose em {
+  @apply text-gray-300;
+}
+
+.prose ul, .prose ol {
+  @apply pl-6 my-4;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-gray-600 pl-4 italic text-gray-400;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #718096;
 }
 
