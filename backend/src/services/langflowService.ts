@@ -2,11 +2,15 @@
 
 import LangflowClient from './langflowClient';
 import { EngagementMetrics } from "../types/index";
-
-const flowIdOrName = '00894e68-8ca9-4b66-82dc-a136a706c7ad';
-const langflowId = '6c902b61-f18a-4666-b457-0926f9532a23';
-const applicationToken = process.env.DATASTAX_TOKEN || '';
+import dotenv from 'dotenv';
+const flowIdOrName = '69f6bf64-4f03-4d35-9757-6d8bef6fa1c8';
+const langflowId = '7a2336ee-11fb-4fa1-bab5-e8fde6cfc07e';
+const applicationToken = process.env.ASTRA_TOKEN || "";
 const baseURL = process.env.LANGFLOW_BASE_URL || 'https://api.langflow.astra.datastax.com';
+
+dotenv.config({
+  path: ".env",
+});
 
 const langflowClient = new LangflowClient(baseURL, applicationToken);
 
