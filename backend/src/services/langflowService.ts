@@ -3,8 +3,8 @@
 import LangflowClient from './langflowClient';
 import { EngagementMetrics } from "../types/index";
 import dotenv from 'dotenv';
-const flowIdOrName = '69f6bf64-4f03-4d35-9757-6d8bef6fa1c8';
-const langflowId = '7a2336ee-11fb-4fa1-bab5-e8fde6cfc07e';
+const flowIdOrName = '6042e57c-f0ca-456c-a853-595aeefd3de3';
+const langflowId = '6c902b61-f18a-4666-b457-0926f9532a23';
 const applicationToken = process.env.ASTRA_TOKEN || "";
 const baseURL = process.env.LANGFLOW_BASE_URL || 'https://api.langflow.astra.datastax.com';
 
@@ -36,7 +36,6 @@ export const generateInsights = async (metrics: EngagementMetrics[]): Promise<st
       tweaks,
       false
     );
-    console.log("Langflow insights response:", response);
     if (response && response.outputs && response.outputs[0].outputs[0].outputs.message) {
       return response.outputs[0].outputs[0].outputs.message.message.text;
     }
@@ -62,7 +61,6 @@ export const generateChatResponse = async (
       tweaks,
       false
     );
-    console.log("Langflow response:", response);
     if (response && response.outputs && response.outputs[0].outputs[0].outputs.message) {
       return response.outputs[0].outputs[0].outputs.message.message.text;
     }
