@@ -40,7 +40,7 @@ export function AiChat({ isLoading }: AiChatProps) {
       setMessage('');
 
       try {
-        const response = await axios.post('http://localhost:8000/api/analytics/chat', {
+        const response = await axios.post('https://engage-lens-backend.onrender.com/api/analytics/chat', {
           message,
           history: chatHistory
         });
