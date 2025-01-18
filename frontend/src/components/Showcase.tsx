@@ -5,7 +5,7 @@ import img from "@/assets/dashboard-image-preview.png";
 
 export function MacbookScrollDemo() {
   return (
-    <div className="overflow-hidden bg-[#0B0B0F] w-full">
+    <div className="overflow-hidden bg-[#0B0B0F] w-full ">
       <MacbookScroll
         title={
         <span>

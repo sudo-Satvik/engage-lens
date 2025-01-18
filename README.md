@@ -9,6 +9,9 @@ A powerful social media analytics platform that provides deep insights into your
 
 ## 📸 Glimpses:
 
+### Langflow
+![Langflow Flowchart Screenshot](/assets/langflow.png)
+
 ### Landing Page
 ![Landing Page ScreenShot](/assets/landing-page.png)
 
@@ -25,7 +28,7 @@ A powerful social media analytics platform that provides deep insights into your
 ![Engagement Trends Over Time ScreenShot](/assets/engagement-trends.png)
 
 ### AI ChatBot which helps users to get insights
-![AI Chat Page ScreenShot](/assets/ai-page.png)
+![AI Chat Page ScreenShot](/assets/ai-chat.png)
 
 ## 👁️ About EngageLens  
 
