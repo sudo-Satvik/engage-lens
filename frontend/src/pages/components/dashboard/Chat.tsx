@@ -10,7 +10,9 @@ export default function Chat() {
   const { isLoading } = useOutletContext<DashboardContext>();
 
   return (
-      <AiChat isLoading={isLoading} />
+      <div className='mt-[-1.5rem]'>
+        <AiChat isLoading={isLoading} />
+      </div>
   );
 }
 
